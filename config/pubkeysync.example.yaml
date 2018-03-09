@@ -1,0 +1,49 @@
+# Local PubKeySync Agent keypair
+private_key: 'pubkeysync.key'
+public_key: 'pubkeysync.pub'
+
+# List of user groups
+groups:
+    - admin
+    - staff
+    - limited
+
+# List of Users
+users:
+    - user1:
+        key: 'custom.pub'
+        groups: ['admin']
+    - user2:
+        groups: ['staff', 'limited']
+    - user3:
+        groups: ['limited']
+    - user4
+
+# List of Categories
+categories:
+    - databases:
+        groups: ['admin']
+        users: ['user4']
+        ssh_user: 'db'
+    - webservers:
+        groups: ['admin']
+    - infrastructure:
+        groups: ['admin']
+    - infrastructure-limited:
+        groups: ['limited']
+        ssh_user: 'wheel'
+
+# List of servers to sync. 
+servers:
+    - server1:
+        host: '127.0.0.1'
+        ssh_user: 'root'
+        ssh_port: '22'
+        groups: ['admin']
+        categories: ['infrastructure', 'webservers']
+    - server2:
+        host: '127.0.0.2'
+        ssh_user: 'root'
+        ssh_port: '22'
+        groups: ['limited']
+        users: ['user1', 'user2']
